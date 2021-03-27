@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+        <mat-label>Documento</mat-label>
+        <input matInput formControlName="documento" required value="">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Tipo de pessoa</mat-label>
+        <mat-select formControlName="tipoDocumento">
+            <mat-option value="PF">Pessoa Física</mat-option>
+            <mat-option value="PJ">Pessoa Juridica</mat-option>
+            <mat-option value="PR">Produtor Rural</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="">
+        <button mat-raised-button color="primary" type="submit">Buscar</button>
+    </div>
+</form>
