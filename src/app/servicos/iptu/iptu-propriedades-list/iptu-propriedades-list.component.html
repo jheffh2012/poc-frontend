@@ -1,0 +1,25 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>Lista de Propriedades</mat-card-title>
+        <mat-card-subtitle>Requisições enviadas a integração via rabbit</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let propriedade of propriedades">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{propriedade.codigo}}
+                </mat-panel-title>
+                <mat-panel-description>
+                  {{propriedade.endereco}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <iptu-propriedade-item (onEmitirBoleto)="emitirBoleto($event)" [propriedade]="propriedade"></iptu-propriedade-item>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card-content>
+    <mat-card-actions>
+      <!-- <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button> -->
+    </mat-card-actions>
+</mat-card>

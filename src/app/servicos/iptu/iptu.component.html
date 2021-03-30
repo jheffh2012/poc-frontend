@@ -12,6 +12,9 @@
         </mat-select>
     </mat-form-field>
     <div class="">
-        <button mat-raised-button color="primary" type="submit">Buscar</button>
+        <button [disabled]="form.invalid" mat-raised-button color="primary" type="submit">Buscar</button>
+    </div>
+    <div *ngIf="viewResultado">
+        <iptu-propriedades-list (onEmitirBoleto)="emitirBoleto($event)" [propriedades]="propriedades"></iptu-propriedades-list>
     </div>
 </form>

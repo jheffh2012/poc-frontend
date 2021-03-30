@@ -1,7 +1,9 @@
 import { JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ServicosService } from '../servicos.service';
+import { Propriedade } from './propriedade.model';
 
 @Component({
   selector: 'app-iptu',
@@ -11,10 +13,13 @@ import { ServicosService } from '../servicos.service';
 export class IptuComponent implements OnInit {
 
   public form: FormGroup;
+  public viewResultado: boolean = false;
+  public propriedades: Propriedade[] = [];
 
   constructor(
     protected formBuilder: FormBuilder,
-    protected servico: ServicosService
+    protected servico: ServicosService,
+    protected router: Router
   ) {
     this.form = this.formBuilder.group({
       documento: [null, Validators.required],
@@ -27,10 +32,22 @@ export class IptuComponent implements OnInit {
   }
 
   onSubmit = () => {
-    this.servico.GerarNumeroBoleto(this.form.getRawValue())
+    this.servico.buscarPropriedades(
+      this.form.controls["tipoDocumento"].value, 
+      this.form.controls["documento"].value)
+      .toPromise()
       .then((resultado) => {
-        console.log(resultado);
         this.form?.reset();
+        this.propriedades = resultado;
+        this.viewResultado = true;
+      });
+  }
+
+  emitirBoleto = (dados: any) => {
+    this.servico.GerarNumeroBoleto(dados)
+      .toPromise()
+      .then(e => {
+        this.router.navigate(["mensagem"]);
       })
   }
 }

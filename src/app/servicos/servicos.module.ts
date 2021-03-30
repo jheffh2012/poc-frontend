@@ -5,14 +5,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-
 import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { IptuComponent } from './iptu/iptu.component';
 import { ServicosRoutingModule } from './servicos-routing.module';
+import { IptuPropriedadesListComponent } from './iptu/iptu-propriedades-list/iptu-propriedades-list.component';
+import { IptuPropriedadeItemComponent } from './iptu/iptu-propriedade-item/iptu-propriedade-item.component';
 
 @NgModule({
-  declarations: [IptuComponent],
+  declarations: [IptuComponent, IptuPropriedadesListComponent, IptuPropriedadeItemComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -21,7 +24,9 @@ import { ServicosRoutingModule } from './servicos-routing.module';
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatExpansionModule
   ]
 })
 export class ServicosModule { }

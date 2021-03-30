@@ -1,5 +1,15 @@
-FROM nginx
+FROM node:12.16.1-alpine As builder
 
-COPY dist/cluster-front/ /var/www/
+WORKDIR /usr/src/app
 
-WORKDIR /var/www/
+COPY package.json package-lock.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build --prod
+
+FROM nginx:1.15.8-alpine
+
+COPY --from=builder /usr/src/app/dist/cluster-front/ /usr/share/nginx/html
